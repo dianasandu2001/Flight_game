@@ -21,4 +21,3 @@ countryGoal = 5
 
 #Game code
 while countryTravaled < countryGoal:
-    woop
