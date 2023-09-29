@@ -1,4 +1,14 @@
 #Connection to DataBase
+import mysql.connector
+
+connection = mysql.connector.connect(
+    host='127.0.0.1',
+    port=3306,
+    database='people',
+    user='dbuser',
+    password='pass_word',
+    autocommit=True
+)
 
 #Variable
 fuel = 20_000
@@ -10,4 +20,4 @@ countryGoal = 5
 #Functions
 
 #Game code
-While countryTravaled < countryGoal:
+while countryTravaled < countryGoal:
