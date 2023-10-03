@@ -11,6 +11,8 @@ connection = mysql.connector.connect(
     autocommit=True
 )
 """
+import random
+
 #Variable
 fuel = 20_000
 fuelUsage = 0
@@ -20,8 +22,8 @@ countryTraveled = 0
 countryGoal = 5
 
 #Lists
-    Questions = []
-    Answers = []
+    Questions = ["Romania is the largest salt mine in Europe", ]
+    Answers = ["true", ]
 
 #Functions
 def distanceairport():
@@ -76,7 +78,10 @@ countryDestination = input("Which country would you like to go to (in Europe)?: 
 airportDestination = input(f"{}this is the filtered\nWhich airpot would you like to visit in {countryDestination}: {}")
 while countryTraveled < countryGoal:
     #ask the question
-        if answer is in list:
+    number = random.randint(0, (len(Questions)-1))
+    print(random.choice(Questions))
+    answer = lower.input("Is this true or false: ")
+        if answer in Answers:
             fuel = fuel + 5000
             print("Answer is correct, 5000l of fuel awarded")
         else:
