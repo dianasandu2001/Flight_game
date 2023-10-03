@@ -55,6 +55,17 @@ def updateVar(fuel, totalDistance):
     totalDistance = totalDistance + distanceTraveled
     print(f"You have travelled: {totalDistance}km")
     print(f"Countries travelled to: {countryTraveled}")
+#Function to filter 3 random airports from chosen country
+def random3airport(country):
+    sql = "SELECT airport.name, ident FROM airport, country"
+    sql += " WHERE airport.iso_country = country.iso_country AND country.name ='" + country + "  ORDER BY RAND ( )  LIMIT 3"
+    cus.execute(sql)
+    row = cus.fetchall()
+    if row == 0:
+        print("No result")
+    else:
+        for airport, icao in row:
+            print(f"Airport name: {airport} \nICAO: {icao} ")
 
 #Game code
 userName = input("Please enter your name: ")
