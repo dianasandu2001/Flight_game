@@ -41,5 +41,5 @@ def random3airport(country):
         print("No result")
     else:
         for airport, icao in row:
-            print(f"Airport name: {airport} \nICAO: {icao}")
+            print(f"Airport name: {airport} \nICAO: {icao} ")
 
