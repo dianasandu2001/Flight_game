@@ -87,9 +87,9 @@ while countryTraveled < countryGoal:
         print("Answer is correct, 5000l of fuel awarded.")
     else:
         print("Answer is wrong, no fuel awarded.")
-
+    Questions.pop([number])
     updateVar(fuel,totalDistance)
-    countryDestination = input("Which country would you like to go to next?")
+    countryDestination = input("Which country would you like to go to next?: ")
     #filter out 3 choices of airports for the country
     airportDestination = input(f"{}this is the filtered\nWhich airpot would you like to visit in {countryDestination}: {}")
     break
