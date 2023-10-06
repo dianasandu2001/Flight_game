@@ -17,8 +17,8 @@ import random
 fuel = 20_000
 fuelUsage = 0
 totalDistance = 0
-distanceTraveled = 0
-countryTraveled = 0
+distanceTravelled = 0
+countryTravelled = 0
 countryGoal = 5
 
 #Lists
@@ -53,10 +53,10 @@ def convertkmtofuel(distance):
 def updateVar(fuel, totalDistance):
     fuel = fuel - fuelUsage
     print(f"Your remaining fuel is: {fuel}l")
-    distanceTraveled = distanceairport()
-    totalDistance = totalDistance + distanceTraveled
+    distanceTravelled = distanceairport()
+    totalDistance = totalDistance + distanceTravelled
     print(f"You have travelled: {totalDistance}km")
-    print(f"Countries travelled to: {countryTraveled}")
+    print(f"Countries travelled to: {countryTravelled}")
 #Function to filter 3 random airports from chosen country
 def random3airport(country):
     sql = "SELECT airport.name, ident FROM airport, country"
@@ -70,26 +70,31 @@ def random3airport(country):
             print(f"Airport name: {airport} \nICAO: {icao} ")
 
 #Game code
+#Intro
 userName = input("Please enter your name: ")
 print(f"Hello {userName}, welcome to our flight game!\nYour goal is to visit 5 different countries without running out of fuel.\nYou have been given 20 000 liters of fuel, and will be given the oportunity to gain more later by answering trivia qustions.\nHave fun and good luck! :)")
 updateVar(fuel, totalDistance)
-countryDestination = input("Which country would you like to go to (in Europe)?: ")
-#filter out 3 choices of airports for the country
-airportDestination = input(f"{}this is the filtered\nWhich airpot would you like to visit in {countryDestination}: {}")
-while countryTraveled < countryGoal:
 
-    #ask the question
-    number = random.randint(0, (len(Questions) - 1))
-    print(Questions[number])
-    answer = input("Is this true or false: ").lower()
-    if answer == Answers[number]:
-        # fuel = fuel + 5000
-        print("Answer is correct, 5000l of fuel awarded.")
+#Loop
+while countryTravelled < countryGoal:
+    if fuelUsage > fuel:
+        print("Game over :(\nYou have ran out of fuel")
+        break
     else:
-        print("Answer is wrong, no fuel awarded.")
-    Questions.pop([number])
-    updateVar(fuel,totalDistance)
-    countryDestination = input("Which country would you like to go to next?: ")
-    #filter out 3 choices of airports for the country
-    airportDestination = input(f"{}this is the filtered\nWhich airpot would you like to visit in {countryDestination}: {}")
-    break
+        countryDestination = input("Which country would you like to go to (in Europe)?: ")
+        airportDestination = input(f"{random3airport(countryDestination)}\nWhich airport would you like to visit in {countryDestination} (input the ID): ")
+        print(f"You have arrived in {countryDestination}")
+        countryTravelled += 1
+        number = random.randint(0, (len(Questions) - 1))
+        print(Questions[number])
+        answer = input("Is this true or false: ").lower()
+        if answer == Answers[number]:
+            fuel = fuel + 5000
+            print("Answer is correct, 5000l of fuel awarded.")
+        else:
+            print("Answer is wrong, no fuel awarded.")
+        Questions.pop([number])
+        updateVar(fuel, totalDistance)
+
+if countryTravelled == countryGoal:
+    print("Congratulations! You have successfully travelled to 5 different countries :)")
