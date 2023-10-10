@@ -125,31 +125,34 @@ while countryTravelled < countryGoal:
         break
     else:
         countryDestination = input("\nWhich country would you like to go to (in Europe)?: ")
-        # Check spelling?????
-        print("")
-        print(random3airport(countryDestination))
-        destinationID = input(f"\nWhich airport would you like to visit in {countryDestination.title()} (input ID): ")
-        # Check for match
-        distanceTravelled = distanceairport(currentID, destinationID)
-        totalDistance += distanceTravelled
-        currentID = destinationID
-        fuelUsage = convertkmtofuel(distanceTravelled)
-        fuel = fuel - fuelUsage
-        print(f"You have arrived in {countryDestination}")
-        countryTravelled += 1
-        # Trivia question
-        number = random.randint(0, (len(Questions) - 1))
-        print("Trivia: " + Questions[number])
-        answer = input("Is this true or false: ").lower()
-        print("")
-        if answer == Answers[number]:
-            fuel = fuel + 10000
-            print("Answer is correct, 10000l of fuel awarded.")
+        if countryDestination.title() in EuropeCountries:
+            print("")
+            print(random3airport(countryDestination))
+            destinationID = input(f"\nWhich airport would you like to visit in {countryDestination.title()} (input ID): ")
+            # Check for match
+            distanceTravelled = distanceairport(currentID, destinationID)
+            totalDistance += distanceTravelled
+            currentID = destinationID
+            fuelUsage = convertkmtofuel(distanceTravelled)
+            fuel = fuel - fuelUsage
+            print(f"You have arrived in {countryDestination}")
+            countryTravelled += 1
+            # Trivia question
+            number = random.randint(0, (len(Questions) - 1))
+            print("Trivia: " + Questions[number])
+            answer = input("Is this true or false: ").lower()
+            print("")
+            if answer == Answers[number]:
+                fuel = fuel + 10000
+                print("Answer is correct, 10000l of fuel awarded.")
+            else:
+                print("Answer is wrong, no fuel awarded.")
+            Questions.pop(number)
+            Answers.pop(number)
+            EuropeCountries.pop(EuropeCountries.index(countryDestination))
+            displayvar()
         else:
-            print("Answer is wrong, no fuel awarded.")
-        Questions.pop(number)
-        Answers.pop(number)
-        displayvar()
+            print("Invalid country name.")
 
 if countryTravelled == countryGoal:
     print("Congratulations! You have successfully travelled to 5 different countries :)")
