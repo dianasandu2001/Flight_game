@@ -1,4 +1,4 @@
-#Connection to DataBase
+# Connection to DataBase
 import mysql.connector
 from geopy.distance import geodesic as GD
 import random
@@ -12,7 +12,7 @@ connection = mysql.connector.connect(
 )
 cus = connection.cursor()
 
-#Variable
+# Variable
 fuel = 30_000
 fuelUsage = 0
 totalDistance = 0
@@ -20,7 +20,7 @@ countryTravelled = 0
 countryGoal = 5
 currentID = '2307'
 
-#Lists
+# Lists
 ID_checker = []
 Questions = ["Romania has the largest salt mine in Europe.", "Iceland doesn’t have mosquitos.", "Norway knighted a penguin. More than once.", "Wales has more sheep than people.", "It is illegal to take a picture of the Eiffel Tower.", "More than 200 Languages are spoken throughout Europe.", "The Stonehenge is the most visited attraction in Europe.", "French fries were Invented in Belgium.", "No Cappuccino After 11 Am in Italy. (social stigma)", "Spain produces 60% of Europe’s cheese.", "Of the British Museum's Collection, Only 1% Is on Display.", "It Is Illegal to Name Your Pig Napoleon in France.", "The Grand Canal in Venice is 50% wine", "Finland has the second most amount of lakes in Europe", "More Chocolate Is Bought at Brussels Airport Than Any Other Place in the World.", "Germany's Famous Oktoberfest Is Actually in November.", "80% of Greece is made up of mountains.", "Sweden is home of the first Christmas tree.", "The Danish language has no word for 'please'.", "LEGO was invented by a Russian."]
 Answers = ["true", "true", "true", "true", "false", "true", "false", "true", "true", "false", "true", "true", "false", "false", "true", "false", "true", "false", "true", "false"]
@@ -35,7 +35,7 @@ for cou in row:
     EuropeCountries.append(country)
 
 
-#Functions to calculate distance between 2 airports
+# Function to calculate distance between 2 airports
 def distanceairport(currentID, destinationID):
     sql = "SELECT latitude_deg, longitude_deg FROM airport"
     sql += " WHERE id = '" + currentID + "' OR id = '" + destinationID + "'"
@@ -64,7 +64,7 @@ def convertkmtofuel(distance):
 def displayvar():
     print(f"\nFuel left: {fuel} litres\nDistance travelled: {totalDistance} km\nCountries travelled: {countryTravelled}")
 
-#Function to filter 3 random airports from chosen country
+# Function to filter 3 random airports from chosen country
 def random3airport(country):
     sql = "SELECT airport.name, id FROM airport, country"
     sql += " WHERE airport.iso_country = country.iso_country AND country.name ='" + country + "' ORDER BY RAND( )  LIMIT 3"
@@ -85,6 +85,7 @@ displayvar()
 
 #Loop
 while countryTravelled < countryGoal:
+    # Check if there's any fuel left
     if fuel <= 0:
         print("Game over :(\nYou have ran out of fuel")
         break
@@ -109,30 +110,34 @@ while countryTravelled < countryGoal:
             totalDistance += distanceTravelled
             currentID = destinationID
             fuelUsage = convertkmtofuel(distanceTravelled)
-            fuel = fuel - fuelUsage
 
-            print(f"You have arrived in {countryDestination}")
-            countryTravelled += 1
-
-            # Trivia question
-            number = random.randint(0, (len(Questions) - 1))
-            print("Trivia: " + Questions[number])
-            answer = input("Is this true or false: ").lower()
-            print("")
-            if answer == Answers[number]:
-                fuel = fuel + 10000
-                print("Answer is correct, 10000l of fuel awarded.")
+            # Check if enough fuel to reach destination
+            if fuelUsage > fuel:
+                print(f"You don't have enough fuel to go to {countryDestination}! Choose another country.")
             else:
-                print("Answer is wrong, no fuel awarded.")
+                fuel = fuel - fuelUsage
+                print(f"You have arrived in {countryDestination}")
+                countryTravelled += 1
 
-            # Remove asked question, selected country and empty ID list
-            Questions.pop(number)
-            Answers.pop(number)
-            EuropeCountries.pop(EuropeCountries.index(countryDestination))
-            ID_checker = []
+                # Trivia question
+                number = random.randint(0, (len(Questions) - 1))
+                print("Trivia: " + Questions[number])
+                answer = input("Is this true or false: ").lower()
+                print("")
+                if answer == Answers[number]:
+                    fuel = fuel + 10000
+                    print("Answer is correct, 10000l of fuel awarded.")
+                else:
+                    print("Answer is wrong, no fuel awarded.")
 
-            # Display fuel, distance and countries travelled
-            displayvar()
+                # Remove asked question, selected country and empty ID list
+                Questions.pop(number)
+                Answers.pop(number)
+                EuropeCountries.pop(EuropeCountries.index(countryDestination))
+                ID_checker = []
+
+                # Display fuel, distance and countries travelled
+                displayvar()
         else:
             print("Invalid country name.")
 
