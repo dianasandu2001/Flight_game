@@ -81,12 +81,12 @@ while countryTravelled < countryGoal:
         print("Game over :(\nYou have ran out of fuel")
         break
     else:
-        countryDestination = input("\nWhich country would you like to go to (in Europe)?: ")
+        countryDestination = (input("\nWhich country would you like to go to (in Europe)?: ")).title()
         # Check for spelling error
-        if countryDestination.title() in EuropeCountries:
+        if countryDestination in EuropeCountries:
             print("")
             random3airport(countryDestination)
-            destinationID = input(f"\nWhich airport would you like to visit in {countryDestination.title()} (input ID): ")
+            destinationID = input(f"\nWhich airport would you like to visit in {countryDestination} (input ID): ")
             # Check for match ID
             while True:
                 if destinationID in ID_checker:
