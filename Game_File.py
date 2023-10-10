@@ -69,7 +69,7 @@ def random3airport(country):
 #Game code
 #Intro
 userName = input("Please enter your name: ")
-print(f"Hello {userName}, welcome to our flight game!\nYour goal is to visit 5 different countries without running out of fuel. Your starting point is Helsinki Vantaa Airport, Finland.\nYou have been given 30 000 liters of fuel, and will be given the opportunity to gain more later by answering trivia qustions.\nHave fun and good luck! :)")
+print(f"\nHello {userName}, welcome to our flight game!\nYour goal is to visit 5 different countries without running out of fuel. Your starting point is Helsinki Vantaa Airport, Finland.\nYou have been given 30 000 liters of fuel, and will be given the opportunity to gain more later by answering trivia qustions.\nHave fun and good luck! :)")
 displayvar()
 
 #Loop
@@ -78,9 +78,12 @@ while countryTravelled < countryGoal:
         print("Game over :(\nYou have ran out of fuel")
         break
     else:
-        countryDestination = input("Which country would you like to go to (in Europe)?: ")
+        countryDestination = input("\nWhich country would you like to go to (in Europe)?: ")
+        # Check spelling?????
+        print("")
         print(random3airport(countryDestination))
-        destinationID = input(f"Which airport would you like to visit in {countryDestination} (input ID): ")
+        destinationID = input(f"\nWhich airport would you like to visit in {countryDestination.title()} (input ID): ")
+        # Check for match
         distanceTravelled = distanceairport(currentID, destinationID)
         totalDistance += distanceTravelled
         currentID = destinationID
@@ -92,6 +95,7 @@ while countryTravelled < countryGoal:
         number = random.randint(0, (len(Questions) - 1))
         print("Trivia: " + Questions[number])
         answer = input("Is this true or false: ").lower()
+        print("")
         if answer == Answers[number]:
             fuel = fuel + 10000
             print("Answer is correct, 10000l of fuel awarded.")
