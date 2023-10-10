@@ -24,53 +24,8 @@ currentID = '2307'
 #Lists
 Questions = ["Romania has the largest salt mine in Europe.", "Iceland doesn’t have mosquitos.", "Norway knighted a penguin. More than once.", "Wales has more sheep than people.", "It is illegal to take a picture of the Eiffel Tower.", "More than 200 Languages are spoken throughout Europe.", "The Stonehenge is the most visited attraction in Europe.", "French fries were Invented in Belgium.", "No Cappuccino After 11 Am in Italy. (social stigma)", "Spain produces 60% of Europe’s cheese.", "Of the British Museum's Collection, Only 1% Is on Display.", "It Is Illegal to Name Your Pig Napoleon in France.", "The Grand Canal in Venice is 50% wine", "Finland has the second most amount of lakes in Europe", "More Chocolate Is Bought at Brussels Airport Than Any Other Place in the World.", "Germany's Famous Oktoberfest Is Actually in November.", "80% of Greece is made up of mountains.", "Sweden is home of the first Christmas tree.", "The Danish language has no word for 'please'.", "LEGO was invented by a Russian."]
 Answers = ["true", "true", "true", "true", "false", "true", "false", "true", "true", "false", "true", "true", "false", "false", "true", "false", "true", "false", "true", "false"]
-EuropeCountries = [ Andorra, Albania, Austria, Bosnia and Herzegovina |
-| Belgium                |
-| Bulgaria               |
-| Belarus                |
-| Switzerland            |
-| Czech Republic         |
-| Germany                |
-| Denmark                |
-| Estonia                |
-| Spain                  |
-| Finland                |
-| Faroe Islands          |
-| France                 |
-| United Kingdom         |
-| Guernsey               |
-| Gibraltar              |
-| Greece                 |
-| Croatia                |
-| Hungary                |
-| Ireland                |
-| Isle of Man            |
-| Iceland                |
-| Italy                  |
-| Jersey                 |
-| Liechtenstein          |
-| Lithuania              |
-| Luxembourg             |
-| Latvia                 |
-| Monaco                 |
-| Moldova                |
-| Montenegro             |
-| North Macedonia        |
-| Malta                  |
-| Netherlands            |
-| Norway                 |
-| Poland                 |
-| Portugal               |
-| Romania                |
-| Serbia                 |
-| Russia                 |
-| Sweden                 |
-| Slovenia               |
-| Slovakia               |
-| San Marino             |
-| Ukraine                |
-| Vatican City           |
-| Kosovo                 ]
+EuropeCountries = ["Andorra", "Albania", "Austria", "Bosnia and Herzegovina","Belgium", "Bulgaria", "Belarus", "Switzerland", "Czech Republic", "Germany", "Denmark", "Estonia", "Spain", "Finland", "Faroe Islands", "France", "United Kingdom", "Guernsey", "Gibraltar", "Greece", "Croatia", "Hungary", "Ireland", "Isle of Man", "Iceland", "Italy", "Jersey", "Liechtenstein", "Lithuania", "Luxembourg", "Latvia", "Monaco", "Moldova", "Montenegro", "North Macedonia", "Malta", "Netherlands", "Norway", "Poland", "Portugal", "Romania", "Serbia", "Russia", "Sweden", "Slovenia", "Slovakia", "San Marino", "Ukraine", "Vatican City", "Kosovo"]
+
 #Functions
 def distanceairport(currentID, destinationID):
     sql = "SELECT latitude_deg, longitude_deg FROM airport"
