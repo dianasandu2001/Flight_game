@@ -54,7 +54,7 @@ def convertkmtofuel(distance):
 
 # Function to display variables after:
 def displayvar():
-    print(f"Fuel left: {fuel} litres\nDistance travelled: {totalDistance} km\nCountries travelled: {countryTravelled}")
+    print(f"\nFuel left: {fuel} litres\nDistance travelled: {totalDistance} km\nCountries travelled: {countryTravelled}")
 
 #Function to filter 3 random airports from chosen country
 def random3airport(country):
@@ -119,4 +119,4 @@ while countryTravelled < countryGoal:
             print("Invalid country name.")
 
 if countryTravelled == countryGoal:
-    print("Congratulations! You have successfully travelled to 5 different countries :)")
+    print("\nCongratulations! You have successfully travelled to 5 different countries :)")
