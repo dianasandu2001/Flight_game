@@ -19,6 +19,7 @@ totalDistance = 0
 countryTravelled = 0
 countryGoal = 5
 currentID = '2307'
+visitedCountries = []
 
 # Lists
 ID_checker = []
@@ -85,61 +86,64 @@ displayvar()
 
 #Loop
 while countryTravelled < countryGoal:
-    # Check if there's any fuel left
-    if fuel <= 0:
-        print("Game over :(\nYou have ran out of fuel")
-        break
-    else:
-        countryDestination = (input("\nWhich country would you like to go to (in Europe)?: ")).title()
+    countryDestination = (input("\nWhich country would you like to go to (in Europe)?: ")).title()
 
-        # Check if country name is correct and not duplicated
-        if countryDestination in EuropeCountries:
-            print("")
-            random3airport(countryDestination)
-            destinationID = input(f"\nWhich airport would you like to visit in {countryDestination} (input ID): ")
+    # Check if country name is correct and not duplicated
+    if countryDestination in EuropeCountries:
+        print()
+        random3airport(countryDestination)
+        destinationID = input(f"\nWhich airport would you like to visit in {countryDestination} (input ID): ")
 
-            # Check for match ID
-            while True:
-                if destinationID in ID_checker:
-                    break
-                else:
-                    destinationID = input("Invalid ID. Try again: ")
-
-            # Calculate distance and convert to fuel usage
-            distanceTravelled = distanceairport(currentID, destinationID)
-            totalDistance += distanceTravelled
-            currentID = destinationID
-            fuelUsage = convertkmtofuel(distanceTravelled)
-
-            # Check if enough fuel to reach destination
-            if fuelUsage > fuel:
-                print(f"You don't have enough fuel to go to {countryDestination}! Choose another country.")
+        # Check for match ID
+        while True:
+            if destinationID in ID_checker:
+                break
             else:
-                fuel = fuel - fuelUsage
-                print(f"You have arrived in {countryDestination}")
-                countryTravelled += 1
+                destinationID = input("Invalid ID. Try again: ")
 
-                # Trivia question
-                number = random.randint(0, (len(Questions) - 1))
-                print("Trivia: " + Questions[number])
-                answer = input("Is this true or false: ").lower()
-                print("")
-                if answer == Answers[number]:
-                    fuel = fuel + 10000
-                    print("Answer is correct, 10000l of fuel awarded.")
-                else:
-                    print("Answer is wrong, no fuel awarded.")
+        # Calculate distance and convert to fuel usage
+        distanceTravelled = distanceairport(currentID, destinationID)
+        totalDistance += distanceTravelled
+        currentID = destinationID
+        fuelUsage = convertkmtofuel(distanceTravelled)
+        fuel = fuel - fuelUsage
+        countryTravelled += 1
 
-                # Remove asked question, selected country and empty ID list
-                Questions.pop(number)
-                Answers.pop(number)
-                EuropeCountries.pop(EuropeCountries.index(countryDestination))
-                ID_checker = []
+        # Trivia question
+        number = random.randint(0, (len(Questions) - 1))
+        print("Trivia: " + Questions[number])
+        answer = input("Is this true or false: ").lower()
+        print()
+        if answer == Answers[number]:
+            fuel = fuel + 10000
+            print("Answer is correct, 10000l of fuel awarded.")
+            print()
 
-                # Display fuel, distance and countries travelled
-                displayvar()
+            # Check if there's any fuel left
+            if fuel <= 0:
+                break
+            print(f"You have arrived in {countryDestination}")
+        else:
+            print("Answer is wrong, no fuel awarded.")
+            if fuel <= 0:
+                break
+            print(f"You have arrived in {countryDestination}")
+
+        # Remove asked question, selected country and empty ID list
+        Questions.pop(number)
+        Answers.pop(number)
+        visitedCountries.append(EuropeCountries.pop(EuropeCountries.index(countryDestination)))
+        ID_checker = []
+
+        # Display fuel, distance and countries travelled
+        displayvar()
+    else:
+        if countryDestination in visitedCountries:
+            print(f"Already visited {countryDestination}, try another country.")
         else:
             print("Invalid country name.")
 
 if countryTravelled == countryGoal:
     print("\nCongratulations! You have successfully travelled to 5 different countries :)")
+elif fuel <= 0:
+    print("Game over :( \nYou have ran out of fuel.......The plane CRASHED!!!!!")
