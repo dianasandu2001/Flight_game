@@ -1,10 +1,10 @@
 import pygame
 
-# Intialize pygame
+# Initialize pygame
 pygame.init()
 
 # Setup screen
-(width, height) = (1000, 1000)
+(width, height) = (800, 900)
 screen = pygame.display.set_mode((width, height))
 bg = pygame.transform.scale(pygame.image.load("mapEurope.jpg"),(width, height))
 
