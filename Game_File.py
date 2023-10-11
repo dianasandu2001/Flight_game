@@ -81,7 +81,7 @@ def random3airport(country):
 #Game code
 #Intro
 userName = input("Please enter your name: ")
-print(f"\nHello {userName}, welcome to our flight game!\nYour goal is to visit 5 different countries without running out of fuel. Your starting point is Helsinki Vantaa Airport, Finland.\nYou have been given 30 000 liters of fuel, and will be given the opportunity to gain more later by answering trivia qustions.\nHave fun and good luck! :)")
+print(f"\nHello {userName}, welcome to our flight game!\nYour goal is to visit 5 different countries without running out of fuel. Your starting point is Helsinki Vantaa Airport, Finland.\nYou have been given 30 000 liters of fuel, and will be given the opportunity to gain more later by answering trivia questions.\nHave fun and good luck! :)")
 displayvar()
 
 #Loop
@@ -146,4 +146,4 @@ while countryTravelled < countryGoal:
 if countryTravelled == countryGoal:
     print("\nCongratulations! You have successfully travelled to 5 different countries :)")
 elif fuel <= 0:
-    print("Game over :( \nYou have ran out of fuel.......The plane CRASHED!!!!!")
+    print(f"Game over :( \nYou're running out of fuel, still need {-fuel} liters more to reach your destination.......The plane CRASHED!!!!!")
