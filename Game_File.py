@@ -166,15 +166,18 @@ while countryTravelled < countryGoal:
                 if fuel <= 0:
                     break
                 print(f"You have arrived in {countryDestination}")
+
             elif answer == "":
                 if fuel <= 0:
                     break
                 print(f"You have arrived in {countryDestination}")
+
             else:
                 print("Answer is wrong, no fuel awarded.")
                 if fuel <= 0:
                     break
                 print(f"You have arrived in {countryDestination}")
+
             Questions.pop(number)
             Answers.pop(number)
             Visited_List.append(EuropeCountries.pop(EuropeCountries.index(countryDestination)))
